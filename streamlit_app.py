@@ -43,7 +43,7 @@ try:
     st.error("Please select a fruit to get information.")
   else:
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit" + fruit_choice)
-    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
     st.dataframe(fruityvice_normalized)
 except URLError as e:
   st.error()
