@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
+import request as rq
 import snowflake.connector
+from urllib.error import URLError
 
 st.title('My Parents New Healthy Diner')
 st.header(' Breakfast Menu')
@@ -32,3 +34,18 @@ my_data_row = my_cur.fetchall()
 
 st.header("The fruit load list contains")
 st.dataframe(my_data_row)
+
+
+st.header('Fruitvice Fruit Advice!')
+try:
+  fruit_choice = st.text_iuput('What fruit wold you like information about?')
+  if not fruit_choice:
+    st.error("Please select a fruit to get information.")
+  else:
+    fruityvice_response = rq.get("https://fruityvice.com/api/fruit" + fruit_choice)
+    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    st.dataframe(fruityvice_normalized)
+except URLError as e:
+  st.error()
+
+
