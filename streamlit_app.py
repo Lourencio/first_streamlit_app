@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import snowflake.connector
 
 st.title('My Parents New Healthy Diner')
 st.header(' Breakfast Menu')
@@ -19,7 +20,7 @@ st.multiselect("Pick some fruits:", list(my_fruit_list.index))
 #Display the table on the page
 st.dataframe(my_fruit_list)
 
-import snowflake.connector
+#Connect to snowflake
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
