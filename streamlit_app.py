@@ -34,10 +34,6 @@ if st.button('Get Fruit Load List'):
   my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
   my_data_row = get_fruit_load_list()
   st.dataframe(my_data_row)
-  
-
-st.header("The fruit load list contains")
-st.dataframe(my_data_row)
 
 def get_fruitvice_data(this_fruit_choice):
   fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
